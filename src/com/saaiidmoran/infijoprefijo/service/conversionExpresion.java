@@ -1,42 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.saaiidmoran.infijoprefijo.service;
 
 /**
  *
  * @author saaii
  */
-import com.saaiidmoran.infijoprefijo.pila.Pila;
+
+import com.saaiidmoran.infijoprefijo.pila.PilaConvertir;
  
-public class conversionExpresion {
+public class ConversionExpresion {
     
-    private final String simbols = "+-*/()^="; 
+    private final String simbolos = "+-*/()^=";
     
     public String Infijo2PrefijoTxt(String infijo){
-         Pila p1 = Infijo2Prefijo(infijo);
-         String text = "";
-         while (p1.i > 0){
-             text += p1.pop();
+         PilaConvertir pilaPrefijo = convertirPrefijo(infijo);
+         StringBuilder text = new StringBuilder();
+         while (pilaPrefijo.i > 0){
+             text.append(pilaPrefijo.pop());
          }
-          return text;
-
+          return text.toString();
      }
+    
     public String Infijo2PosfijoTxt(String infijo){
-        Pila p1 = Infijo2Posfijo(infijo);
-        String text = "";
-        while (p1.i > 0){
-            text = p1.pop() + text;
-        }         
-        return text;
+        PilaConvertir pilaPostfijo = convertirPosfijo(infijo);
+        StringBuilder text = new StringBuilder();
+        while (pilaPostfijo.i > 0){
+            text.append(pilaPostfijo.pop());
+        }  
+        return text.reverse().toString();
     }
-    private Pila Infijo2Prefijo(String infijo) {
+    
+    private PilaConvertir convertirPrefijo(String infijo) {
         infijo = '(' + infijo ; // Agregamos al final del infijo un ')'
         int tamaño = infijo.length();
-        Pila PilaDefinitiva = new Pila(tamaño);
-        Pila PilaTemp = new Pila(tamaño);
+        PilaConvertir PilaDefinitiva = new PilaConvertir(tamaño);
+        PilaConvertir PilaTemp = new PilaConvertir(tamaño);
         PilaTemp.push(')'); // Agregamos a la pila temporal un '('
         for (int i = tamaño-1; i > -1; i--) {
             char caracter = infijo.charAt(i);
@@ -61,11 +58,11 @@ public class conversionExpresion {
         return PilaDefinitiva;
     }
     
-    private Pila Infijo2Posfijo(String infijo) {
+    private PilaConvertir convertirPosfijo(String infijo) {
        infijo += ')'; // Agregamos al final del infijo un ‘)’
        int tamaño = infijo.length();
-       Pila PilaDefinitiva = new Pila(tamaño);
-       Pila PilaTemp = new Pila(tamaño);
+       PilaConvertir PilaDefinitiva = new PilaConvertir(tamaño);
+       PilaConvertir PilaTemp = new PilaConvertir(tamaño);
        PilaTemp.push('('); // Agregamos a la pila temporal un ‘(‘
        for (int i = 0; i < tamaño; i++) { 
            char caracter = infijo.charAt(i);
@@ -130,17 +127,17 @@ public class conversionExpresion {
     }
     
     public String Depurar(String s) {
+        StringBuilder construirRetorno = new StringBuilder();
         String sSinEspacios = s.replaceAll("\\s+", ""); //Elimina espacios en blanco
         //Deja espacios entre operadores
-        String str = ""; 
         for (int i = 0; i < sSinEspacios.length(); i++) {        
-          if(simbols.contains("" + sSinEspacios.charAt(i))) {
-            str += " " + sSinEspacios.charAt(i) + " ";
+          if(simbolos.contains("" + sSinEspacios.charAt(i))) {
+            construirRetorno.append(" ").append(sSinEspacios.charAt(i)).append(" ");
           }else{
-              str += sSinEspacios.charAt(i);
+              construirRetorno.append(sSinEspacios.charAt(i));
           }      
         }
-        return str.replaceAll("\\s+", " ").trim(); //Retorna la expresion depurada 
+        return construirRetorno.toString().replaceAll("\\s+", " ").trim(); //Retorna la expresion depurada 
         //.trim para quitarle los espacios al principio y al final solamente
     }
 }

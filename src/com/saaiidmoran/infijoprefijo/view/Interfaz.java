@@ -1,7 +1,7 @@
 package com.saaiidmoran.infijoprefijo.view;
 
-import com.saaiidmoran.infijoprefijo.service.conversionExpresion;
-import com.saaiidmoran.infijoprefijo.service.resolucionExpresion;
+import com.saaiidmoran.infijoprefijo.service.ConversionExpresion;
+import com.saaiidmoran.infijoprefijo.service.ResolucionExpresion;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -233,7 +233,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(!"".equals(jTextField1.getText())){
-            conversionExpresion p=new conversionExpresion();
+            ConversionExpresion p=new ConversionExpresion();
             jTextField2.setText(p.Infijo2PrefijoTxt(p.Depurar(jTextField1.getText())));
             jTextField3.setText(p.Infijo2PosfijoTxt(p.Depurar(jTextField1.getText())));
         }else{
@@ -254,7 +254,7 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(!"".equals(jTextField1.getText())){
-                conversionExpresion p=new conversionExpresion();
+                ConversionExpresion p=new ConversionExpresion();
                 jTextField2.setText(p.Infijo2PrefijoTxt(p.Depurar(jTextField1.getText())));
                 jTextField3.setText(p.Infijo2PosfijoTxt(p.Depurar(jTextField1.getText()))); 
             }else{
@@ -266,7 +266,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if(!"".equals(jTextField3.getText())){
-            resolucionExpresion v = new resolucionExpresion();
+            ResolucionExpresion v = new ResolucionExpresion();
             if(!v.Valida(jTextField3.getText())){
                jTextField4.setText(jTextField3.getText()); 
             }else{
@@ -281,7 +281,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if(!"".equals(jTextField2.getText())){
-            resolucionExpresion v = new resolucionExpresion();
+            ResolucionExpresion v = new ResolucionExpresion();
             if(!v.Valida(jTextField2.getText())){
                jTextField5.setText(jTextField2.getText()); 
             }else{

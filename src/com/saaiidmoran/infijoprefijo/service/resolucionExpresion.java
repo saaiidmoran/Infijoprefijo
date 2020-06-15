@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.saaiidmoran.infijoprefijo.service;
 
-import com.saaiidmoran.infijoprefijo.pila.Pila_1;
+import com.saaiidmoran.infijoprefijo.pila.PilaResolver;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +8,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author saaii
  */
-public class resolucionExpresion {
+
+public class ResolucionExpresion {
    
    public String ResulevePref(String prefijo){
    prefijo=Voltear(prefijo);  
    String resultado = "";
-   Pila_1 p=new Pila_1();
+   PilaResolver p=new PilaResolver();
    String operando = "";
    String actual;
    float v1,v2;
@@ -101,7 +97,7 @@ public class resolucionExpresion {
     
     public String ResulevePost(String postfijo){
     String resultado = "";
-   Pila_1 p=new Pila_1();
+   PilaResolver p=new PilaResolver();
    String operando = "";
    String actual;
    float v1,v2;
@@ -188,7 +184,7 @@ public class resolucionExpresion {
     tabla.addColumn("Pila");
     String datos[]=new String[2];
     String resultado = "";
-    Pila_1 p=new Pila_1();
+    PilaResolver p=new PilaResolver();
     String operando = "";
     String actual;
     float v1,v2;
@@ -301,7 +297,7 @@ public class resolucionExpresion {
     tabla.addColumn("Pila");
     String datos[]=new String[2];
     String resultado = "";
-    Pila_1 p=new Pila_1();
+    PilaResolver p=new PilaResolver();
     String operando = "";
     String actual;
     float v1,v2;

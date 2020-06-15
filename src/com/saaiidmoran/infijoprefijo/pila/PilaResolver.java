@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.saaiidmoran.infijoprefijo.pila;
 
 /**
  *
  * @author saaii
  */
-public class Pila_1 {
+
+public class PilaResolver {
     private NodoPila cima;
     int tama;
-    public Pila_1(){
+    public PilaResolver(){
         cima=null;
         tama=0;
     }
