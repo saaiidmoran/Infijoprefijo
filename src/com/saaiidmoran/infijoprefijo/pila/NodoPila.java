@@ -6,10 +6,32 @@ package com.saaiidmoran.infijoprefijo.pila;
  */
 
 public class NodoPila {
-    String dato;
-    NodoPila siguiente;
+    
+    private String dato;
+    private NodoPila siguiente;
+    
+    public NodoPila(){
+        
+    }
+    
     public NodoPila(String d){
         dato=d;
         siguiente=null;
     }
+
+    public String getDato() {
+        return dato;
+    }
+
+    public void setDato(String dato) {
+        this.dato = dato;
+    }
+
+    public NodoPila getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(NodoPila siguiente) {
+        this.siguiente = siguiente;
+    }    
 }

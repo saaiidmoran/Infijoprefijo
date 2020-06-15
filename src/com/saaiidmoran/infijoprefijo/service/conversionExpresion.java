@@ -5,81 +5,81 @@ package com.saaiidmoran.infijoprefijo.service;
  * @author saaii
  */
 
-import com.saaiidmoran.infijoprefijo.pila.PilaConvertir;
+import com.saaiidmoran.infijoprefijo.pila.Pila;
  
 public class ConversionExpresion {
     
     private final String simbolos = "+-*/()^=";
     
     public String Infijo2PrefijoTxt(String infijo){
-         PilaConvertir pilaPrefijo = convertirPrefijo(infijo);
+         Pila pilaPrefijo = convertirPrefijo(infijo);
          StringBuilder text = new StringBuilder();
-         while (pilaPrefijo.i > 0){
-             text.append(pilaPrefijo.pop());
+         while (!pilaPrefijo.estaVacia()){
+             text.append(pilaPrefijo.sacar());
          }
           return text.toString();
      }
     
     public String Infijo2PosfijoTxt(String infijo){
-        PilaConvertir pilaPostfijo = convertirPosfijo(infijo);
+        Pila pilaPostfijo = convertirPosfijo(infijo);
         StringBuilder text = new StringBuilder();
-        while (pilaPostfijo.i > 0){
-            text.append(pilaPostfijo.pop());
+        while (!pilaPostfijo.estaVacia()){
+            text.append(pilaPostfijo.sacar());
         }  
         return text.reverse().toString();
     }
     
-    private PilaConvertir convertirPrefijo(String infijo) {
-        infijo = '(' + infijo ; // Agregamos al final del infijo un ')'
+    private Pila convertirPrefijo(String infijo) {
+        infijo = '(' + infijo ; // Agregamos al final del infijo un '('
         int tamaño = infijo.length();
-        PilaConvertir PilaDefinitiva = new PilaConvertir(tamaño);
-        PilaConvertir PilaTemp = new PilaConvertir(tamaño);
-        PilaTemp.push(')'); // Agregamos a la pila temporal un '('
+        Pila PilaDefinitiva = new Pila();
+        Pila PilaTemp = new Pila();
+        PilaTemp.empujar(")"); // Agregamos a la pila temporal un ')'
         for (int i = tamaño-1; i > -1; i--) {
             char caracter = infijo.charAt(i);
             switch (caracter) {
             case ')':
-                PilaTemp.push(caracter);
+                PilaTemp.empujar(""+caracter);
                 break;
             case '+':case '-':case '^':case '*':case '/': case '=':
-                while (jerarquiaSignosPrefijo(caracter) > jerarquiaSignosPrefijo(PilaTemp.nextPop()))
-                    PilaDefinitiva.push(PilaTemp.pop());
-                PilaTemp.push(caracter);
+                while (jerarquiaSignosPrefijo(caracter) > jerarquiaSignosPrefijo(PilaTemp.getCima().getDato().charAt(0)))
+                    PilaDefinitiva.empujar(PilaTemp.sacar());
+                PilaTemp.empujar(""+caracter);
                 break;
             case '(':
-                while (PilaTemp.nextPop() != ')')
-                    PilaDefinitiva.push(PilaTemp.pop());
-                PilaTemp.pop();
+                while (PilaTemp.getCima().getDato().charAt(0) != ')')
+                    PilaDefinitiva.empujar(PilaTemp.sacar());
+                PilaTemp.sacar();
                 break;
             default:
-                PilaDefinitiva.push(caracter);
+                PilaDefinitiva.empujar(""+caracter);
             }
         }
         return PilaDefinitiva;
     }
     
-    private PilaConvertir convertirPosfijo(String infijo) {
-       infijo += ')'; // Agregamos al final del infijo un ‘)’
+    private Pila convertirPosfijo(String infijo) {
+       infijo += ')'; // Agregamos al final del infijo un ')'
        int tamaño = infijo.length();
-       PilaConvertir PilaDefinitiva = new PilaConvertir(tamaño);
-       PilaConvertir PilaTemp = new PilaConvertir(tamaño);
-       PilaTemp.push('('); // Agregamos a la pila temporal un ‘(‘
+       Pila PilaDefinitiva = new Pila();
+       Pila PilaTemp = new Pila();
+       PilaTemp.empujar("("); // Agregamos a la pila temporal un '('
        for (int i = 0; i < tamaño; i++) { 
            char caracter = infijo.charAt(i);
            switch (caracter) {
-               case '(': PilaTemp.push(caracter); break; 
+               case '(': PilaTemp.empujar(""+caracter); break; 
                case '+':case '-':case '^':case '*':case '/': case '=': 
-                   while (jerarquiaSignosPostfijo(caracter) <= jerarquiaSignosPostfijo(PilaTemp.nextPop()))
-                       PilaDefinitiva.push(PilaTemp.pop());
-                        PilaTemp.push(caracter);
+                   while (jerarquiaSignosPostfijo(caracter) <= jerarquiaSignosPostfijo(PilaTemp.getCima().getDato().charAt(0)))
+                       PilaDefinitiva.empujar(PilaTemp.sacar());
+                   PilaTemp.empujar(""+caracter);
                    break;
                case ')': 
-                   while (PilaTemp.nextPop() != '(')
-                       PilaDefinitiva.push(PilaTemp.pop());
-                   PilaTemp.pop();
+                   while (PilaTemp.getCima().getDato().charAt(0) != '(')
+                       PilaDefinitiva.empujar(PilaTemp.sacar());
+                   PilaTemp.sacar();
                    break;
                default:
-                   PilaDefinitiva.push(caracter);
+                   PilaDefinitiva.empujar(""+caracter);
            } 
        } return PilaDefinitiva;
     }

@@ -1,7 +1,6 @@
 package com.saaiidmoran.infijoprefijo.service;
 
-import com.saaiidmoran.infijoprefijo.pila.PilaResolver;
-import javax.swing.JOptionPane;
+import com.saaiidmoran.infijoprefijo.pila.Pila;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,7 +13,7 @@ public class ResolucionExpresion {
    public String ResulevePref(String prefijo){
    prefijo=Voltear(prefijo);  
    String resultado = "";
-   PilaResolver p=new PilaResolver();
+   Pila p=new Pila();
    String operando = "";
    String actual;
    float v1,v2;
@@ -97,7 +96,7 @@ public class ResolucionExpresion {
     
     public String ResulevePost(String postfijo){
     String resultado = "";
-   PilaResolver p=new PilaResolver();
+   Pila p=new Pila();
    String operando = "";
    String actual;
    float v1,v2;
@@ -184,7 +183,7 @@ public class ResolucionExpresion {
     tabla.addColumn("Pila");
     String datos[]=new String[2];
     String resultado = "";
-    PilaResolver p=new PilaResolver();
+    Pila p=new Pila();
     String operando = "";
     String actual;
     float v1,v2;
@@ -297,7 +296,7 @@ public class ResolucionExpresion {
     tabla.addColumn("Pila");
     String datos[]=new String[2];
     String resultado = "";
-    PilaResolver p=new PilaResolver();
+    Pila p=new Pila();
     String operando = "";
     String actual;
     float v1,v2;
