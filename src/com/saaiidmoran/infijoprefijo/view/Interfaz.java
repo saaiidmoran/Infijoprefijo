@@ -1,35 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package infijoprefijo;
+package com.saaiidmoran.infijoprefijo.view;
 
+import com.saaiidmoran.infijoprefijo.service.conversionExpresion;
+import com.saaiidmoran.infijoprefijo.service.resolucionExpresion;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.jvnet.substance.SubstanceLookAndFeel;
-
 /**
  *
  * @author saaii
  */
 public class Interfaz extends javax.swing.JFrame {
+    
+    private final Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/saaiidmoran/infijoprefijo/imagenes/Logo.png"));
 
-    /**
-     * Creates new form Interfaz
-     */
     public Interfaz() {
         initComponents();
         Interfaz.setDefaultLookAndFeelDecorated(true);
         SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.MagmaSkin");
         SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceEbonyTheme");
-        this.setLocationRelativeTo(null);
-        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Logo.png"));
-       setIconImage(icon);
+        setIconImage(icon);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -241,7 +233,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(!"".equals(jTextField1.getText())){
-            Pilas p=new Pilas();
+            conversionExpresion p=new conversionExpresion();
             jTextField2.setText(p.Infijo2PrefijoTxt(p.Depurar(jTextField1.getText())));
             jTextField3.setText(p.Infijo2PosfijoTxt(p.Depurar(jTextField1.getText())));
         }else{
@@ -262,7 +254,7 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(!"".equals(jTextField1.getText())){
-                Pilas p=new Pilas();
+                conversionExpresion p=new conversionExpresion();
                 jTextField2.setText(p.Infijo2PrefijoTxt(p.Depurar(jTextField1.getText())));
                 jTextField3.setText(p.Infijo2PosfijoTxt(p.Depurar(jTextField1.getText()))); 
             }else{
@@ -274,7 +266,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if(!"".equals(jTextField3.getText())){
-            Valores v = new Valores();
+            resolucionExpresion v = new resolucionExpresion();
             if(!v.Valida(jTextField3.getText())){
                jTextField4.setText(jTextField3.getText()); 
             }else{
@@ -289,7 +281,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if(!"".equals(jTextField2.getText())){
-            Valores v = new Valores();
+            resolucionExpresion v = new resolucionExpresion();
             if(!v.Valida(jTextField2.getText())){
                jTextField5.setText(jTextField2.getText()); 
             }else{
@@ -334,10 +326,8 @@ public class Interfaz extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interfaz().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Interfaz().setVisible(true);
         });
     }
 

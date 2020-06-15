@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package infijoprefijo;
+package com.saaiidmoran.infijoprefijo.service;
 
 /**
  *
  * @author saaii
  */
-import javax.swing.JOptionPane;
+import com.saaiidmoran.infijoprefijo.pila.Pila;
  
-public class Pilas {
+public class conversionExpresion {
  
     
    public String Infijo2PrefijoTxt(String infijo){

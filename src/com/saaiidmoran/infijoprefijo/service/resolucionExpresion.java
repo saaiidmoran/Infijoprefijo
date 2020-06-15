@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package infijoprefijo;
+package com.saaiidmoran.infijoprefijo.service;
 
+import com.saaiidmoran.infijoprefijo.pila.Pila_1;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author saaii
  */
-public class Valores {
+public class resolucionExpresion {
    
    public String ResulevePref(String prefijo){
    prefijo=Voltear(prefijo);  

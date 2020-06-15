@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package infijoprefijo;
+package com.saaiidmoran.infijoprefijo;
+
+import com.saaiidmoran.infijoprefijo.view.Interfaz;
 
 /**
  *
@@ -17,6 +19,7 @@ public class infijoprefijo {
     public static void main(String[] args) {
         // TODO code application logic here
         Interfaz a = new Interfaz();
+        a.setLocationRelativeTo(null);
         a.setVisible(true);
     }
     

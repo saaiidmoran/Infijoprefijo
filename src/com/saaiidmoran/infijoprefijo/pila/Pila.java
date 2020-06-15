@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package infijoprefijo;
+package com.saaiidmoran.infijoprefijo.pila;
 
 /**
  *
@@ -12,9 +12,9 @@ package infijoprefijo;
 public class Pila {
     int longi;
     char [] ccarac;
-    int i;
+    public int i;
     
-    Pila(int tamaño){
+    public Pila(int tamaño){
         this.longi=tamaño;
         this.ccarac=new char[tamaño];
         this.i=0;        
