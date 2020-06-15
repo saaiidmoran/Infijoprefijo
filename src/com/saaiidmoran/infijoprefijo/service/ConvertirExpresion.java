@@ -7,7 +7,7 @@ package com.saaiidmoran.infijoprefijo.service;
 
 import com.saaiidmoran.infijoprefijo.pila.Pila;
  
-public class ConversionExpresion {
+public class ConvertirExpresion {
     
     private final String simbolos = "+-*/()^=";
     

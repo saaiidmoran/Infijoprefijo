@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
  * @author saaii
  */
 
-public class ResolucionExpresion {
+public class ResolverExpresion {
    
    public String ResulevePref(String prefijo){
    prefijo=Voltear(prefijo);  
