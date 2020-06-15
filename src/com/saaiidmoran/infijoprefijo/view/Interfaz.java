@@ -2,8 +2,6 @@ package com.saaiidmoran.infijoprefijo.view;
 
 import com.saaiidmoran.infijoprefijo.service.ConvertirExpresion;
 import com.saaiidmoran.infijoprefijo.service.ResolverExpresion;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -13,14 +11,13 @@ import org.jvnet.substance.SubstanceLookAndFeel;
  */
 public class Interfaz extends javax.swing.JFrame {
     
-    private final Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/saaiidmoran/infijoprefijo/imagenes/Logo.png"));
-
     public Interfaz() {
+        
         initComponents();
         Interfaz.setDefaultLookAndFeelDecorated(true);
         SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.MagmaSkin");
         SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceEbonyTheme");
-        setIconImage(icon);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -232,12 +229,12 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(!"".equals(jTextField1.getText())){
+        if(!"".equals(jTextField1.getText()) && jTextField1.getText().matches("[0-9([+]|[-]|[/]|[*]|[(]|[)]|[(^)])]+")){
             ConvertirExpresion p=new ConvertirExpresion();
-            jTextField2.setText(p.Infijo2PrefijoTxt(p.Depurar(jTextField1.getText())));
-            jTextField3.setText(p.Infijo2PosfijoTxt(p.Depurar(jTextField1.getText())));
+            jTextField2.setText(p.Infijo2PrefijoTxt(p.depurarExpresion(jTextField1.getText())));
+            jTextField3.setText(p.Infijo2PosfijoTxt(p.depurarExpresion(jTextField1.getText())));
         }else{
-            JOptionPane.showMessageDialog(null,"Error, no se insertó nada");
+            JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -255,8 +252,8 @@ public class Interfaz extends javax.swing.JFrame {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(!"".equals(jTextField1.getText())){
                 ConvertirExpresion p=new ConvertirExpresion();
-                jTextField2.setText(p.Infijo2PrefijoTxt(p.Depurar(jTextField1.getText())));
-                jTextField3.setText(p.Infijo2PosfijoTxt(p.Depurar(jTextField1.getText()))); 
+                jTextField2.setText(p.Infijo2PrefijoTxt(p.depurarExpresion(jTextField1.getText())));
+                jTextField3.setText(p.Infijo2PosfijoTxt(p.depurarExpresion(jTextField1.getText()))); 
             }else{
                JOptionPane.showMessageDialog(null,"Error, no se insertó nada"); 
             }
@@ -314,15 +311,11 @@ public class Interfaz extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */

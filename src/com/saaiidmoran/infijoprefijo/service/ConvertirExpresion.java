@@ -126,7 +126,7 @@ public class ConvertirExpresion {
         return res;
     }
     
-    public String Depurar(String s) {
+    public String depurarExpresion(String s) {
         StringBuilder construirRetorno = new StringBuilder();
         String sSinEspacios = s.replaceAll("\\s+", ""); //Elimina espacios en blanco
         //Deja espacios entre operadores
