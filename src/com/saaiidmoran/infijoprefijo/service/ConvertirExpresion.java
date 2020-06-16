@@ -12,7 +12,7 @@ public class ConvertirExpresion {
     private final String simbolos = "+-*/()^=";
     
     public String Infijo2PrefijoTxt(String infijo){
-         Pila pilaPrefijo = convertirPrefijo(infijo);
+         Pila pilaPrefijo = pilaConvertirPrefijo(depurarExpresion(infijo));
          StringBuilder text = new StringBuilder();
          while (!pilaPrefijo.estaVacia()){
              text.append(pilaPrefijo.sacar());
@@ -21,7 +21,7 @@ public class ConvertirExpresion {
      }
     
     public String Infijo2PosfijoTxt(String infijo){
-        Pila pilaPostfijo = convertirPosfijo(infijo);
+        Pila pilaPostfijo = pilaConvertirPosfijo(depurarExpresion(infijo));
         StringBuilder text = new StringBuilder();
         while (!pilaPostfijo.estaVacia()){
             text.append(pilaPostfijo.sacar());
@@ -29,7 +29,7 @@ public class ConvertirExpresion {
         return text.reverse().toString();
     }
     
-    private Pila convertirPrefijo(String infijo) {
+    private Pila pilaConvertirPrefijo(String infijo) {
         infijo = '(' + infijo ; // Agregamos al final del infijo un '('
         int tamaño = infijo.length();
         Pila PilaDefinitiva = new Pila();
@@ -58,7 +58,7 @@ public class ConvertirExpresion {
         return PilaDefinitiva;
     }
     
-    private Pila convertirPosfijo(String infijo) {
+    private Pila pilaConvertirPosfijo(String infijo) {
        infijo += ')'; // Agregamos al final del infijo un ')'
        int tamaño = infijo.length();
        Pila PilaDefinitiva = new Pila();
@@ -126,7 +126,7 @@ public class ConvertirExpresion {
         return res;
     }
     
-    public String depurarExpresion(String s) {
+    private String depurarExpresion(String s) {
         StringBuilder construirRetorno = new StringBuilder();
         String sSinEspacios = s.replaceAll("\\s+", ""); //Elimina espacios en blanco
         //Deja espacios entre operadores
