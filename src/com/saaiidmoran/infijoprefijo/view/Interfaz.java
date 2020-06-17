@@ -5,6 +5,7 @@ import com.saaiidmoran.infijoprefijo.service.ResolverExpresion;
 import com.saaiidmoran.infijoprefijo.service.ServiceMain;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.jvnet.substance.SubstanceLookAndFeel;
 /**
  *
@@ -153,17 +154,9 @@ public class Interfaz extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Símbolo", "Pila"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 190, 280));
@@ -198,7 +191,7 @@ public class Interfaz extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Símbolo", "Pila"
+
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -230,7 +223,7 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(!"".equals(jTextField1.getText()) && ServiceMain.validarExpresionMAtematica(jTextField1.getText())){
+        if(!ServiceMain.campoVacio(jTextField1.getText()) && ServiceMain.validarExpresionMAtematica(jTextField1.getText())){
             ConvertirExpresion p=new ConvertirExpresion();
             jTextField2.setText(p.Infijo2PrefijoTxt(jTextField1.getText()));
             jTextField3.setText(p.Infijo2PosfijoTxt(jTextField1.getText()));
@@ -246,26 +239,28 @@ public class Interfaz extends javax.swing.JFrame {
         jTextField3.setText("");
         jTextField4.setText("");
         jTextField5.setText("");
+        jTable1.setModel(new DefaultTableModel());
+        jTable2.setModel(new DefaultTableModel());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(!"".equals(jTextField1.getText()) && ServiceMain.validarExpresionMAtematica(jTextField1.getText())){
+            if(!ServiceMain.campoVacio(jTextField1.getText()) && ServiceMain.validarExpresionMAtematica(jTextField1.getText())){
                 ConvertirExpresion p=new ConvertirExpresion();
                 jTextField2.setText(p.Infijo2PrefijoTxt(jTextField1.getText()));
                 jTextField3.setText(p.Infijo2PosfijoTxt(jTextField1.getText())); 
             }else{
-               JOptionPane.showMessageDialog(null,"Error, no se insertó nada"); 
+               JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida"); 
             }
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(!"".equals(jTextField3.getText())){
+        if(!ServiceMain.campoVacio(jTextField3.getText())){
             ResolverExpresion v = new ResolverExpresion();
-            if(!v.Valida(jTextField3.getText())){
+            if(!ServiceMain.validaSignos(jTextField3.getText())){
                jTextField4.setText(jTextField3.getText()); 
             }else{
                 jTextField4.setText(v.ResulevePost(jTextField3.getText()));
@@ -278,9 +273,9 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if(!"".equals(jTextField2.getText())){
+        if(!ServiceMain.campoVacio(jTextField2.getText())){
             ResolverExpresion v = new ResolverExpresion();
-            if(!v.Valida(jTextField2.getText())){
+            if(!ServiceMain.validaSignos(jTextField2.getText())){
                jTextField5.setText(jTextField2.getText()); 
             }else{
                 jTextField5.setText(v.ResulevePref(jTextField2.getText()));
