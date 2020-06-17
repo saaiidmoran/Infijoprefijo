@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.saaiidmoran.infijoprefijo;
+package com.saaiidmoran.infijoprefijo.service;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,6 +7,7 @@ import java.awt.Toolkit;
  *
  * @author saaii
  */
+
 public class ServiceMain {
     
     public Image generarIcono(){         
@@ -22,6 +18,10 @@ public class ServiceMain {
             System.out.println("No se encontró el archivo para el icono \n" + e);
         }        
         return icon;        
+    }
+    
+    public static boolean validarExpresionMAtematica(String expresion){
+        return expresion.matches("[0-9([+]|[-]|[/]|[*]|[(]|[)]|[(^)])]+");
     }
     
 }

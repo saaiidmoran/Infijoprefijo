@@ -2,6 +2,7 @@ package com.saaiidmoran.infijoprefijo.view;
 
 import com.saaiidmoran.infijoprefijo.service.ConvertirExpresion;
 import com.saaiidmoran.infijoprefijo.service.ResolverExpresion;
+import com.saaiidmoran.infijoprefijo.service.ServiceMain;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -229,7 +230,7 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(!"".equals(jTextField1.getText()) && jTextField1.getText().matches("[0-9([+]|[-]|[/]|[*]|[(]|[)]|[(^)])]+")){
+        if(!"".equals(jTextField1.getText()) && ServiceMain.validarExpresionMAtematica(jTextField1.getText())){
             ConvertirExpresion p=new ConvertirExpresion();
             jTextField2.setText(p.Infijo2PrefijoTxt(jTextField1.getText()));
             jTextField3.setText(p.Infijo2PosfijoTxt(jTextField1.getText()));
@@ -250,7 +251,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(!"".equals(jTextField1.getText()) && jTextField1.getText().matches("[0-9([+]|[-]|[/]|[*]|[(]|[)]|[(^)])]+")){
+            if(!"".equals(jTextField1.getText()) && ServiceMain.validarExpresionMAtematica(jTextField1.getText())){
                 ConvertirExpresion p=new ConvertirExpresion();
                 jTextField2.setText(p.Infijo2PrefijoTxt(jTextField1.getText()));
                 jTextField3.setText(p.Infijo2PosfijoTxt(jTextField1.getText())); 
