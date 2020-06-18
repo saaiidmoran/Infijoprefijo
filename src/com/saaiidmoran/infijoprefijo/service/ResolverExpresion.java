@@ -29,7 +29,7 @@ public class ResolverExpresion {
         for (int i=0;i<postfijo.length();i++){
             actual=postfijo.substring(i,i+1);
             switch(actual){ 
-                case "+":
+                case "+": case "-": case "*": case "/": case "^":
                     if(!"".equals(operando)){
                         p.empujar(operando);
                          datos[0]=operando;
@@ -39,71 +39,33 @@ public class ResolverExpresion {
                     }
                     v1=Float.parseFloat(p.sacar());
                     v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v2+v1));
+
+                    switch(actual){
+                        case "+":
+                                p.empujar(String.valueOf(v2+v1)); //
+                        break;
+
+                        case "-":
+                                p.empujar(String.valueOf(v2-v1)); //
+                        break;
+
+                        case "*":
+                                p.empujar(String.valueOf(v2*v1)); //
+                        break;
+
+                        case "/":
+                                p.empujar(String.valueOf(v2/v1)); //
+                        break;
+
+                        case "^":
+                                p.empujar(String.valueOf(potenciaConRecursion(v2,v1))); //
+                        break;
+                    }
+
                     datos[0]=actual;
                     datos[1]="["+p.Recorrer()+"]";
                     tabla.addRow(datos);
-                    break;
-                case "-":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                         datos[0]=operando;
-                        datos[1]="["+p.Recorrer()+"]";
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v2-v1));
-                    datos[0]=actual;
-                    datos[1]="["+p.Recorrer()+"]";
-                    tabla.addRow(datos);
-                    break;
-                case "*":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                         datos[0]=operando;
-                        datos[1]="["+p.Recorrer()+"]";
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v2*v1));
-                    datos[0]=actual;
-                    datos[1]=p.Recorrer();
-                    tabla.addRow(datos);
-                    break;
-                case "/":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                         datos[0]=operando;
-                        datos[1]="["+p.Recorrer()+"]";
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v2/v1));
-                    datos[0]=actual;
-                    datos[1]="["+p.Recorrer()+"]";
-                    tabla.addRow(datos);
-                    break;
-                case "^":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                         datos[0]=operando;
-                        datos[1]="["+p.Recorrer()+"]";
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(potenciaConRecursion(v2,v1)));
-                    datos[0]=actual;
-                    datos[1]="["+p.Recorrer()+"]";
-                    tabla.addRow(datos);
-                    break;
+                break;
                 case " ":
                     if(!"".equals(operando)){
                         p.empujar(operando);
@@ -138,7 +100,7 @@ public class ResolverExpresion {
         for (int i=0;i<prefijo.length();i++){
             actual=prefijo.substring(i,i+1);
             switch(actual){ 
-                case "+":
+                case "+": case "-": case "*": case "/": case "^":
                     if(!"".equals(operando)){
                         p.empujar(operando);
                         datos[0]=operando;
@@ -146,78 +108,34 @@ public class ResolverExpresion {
                         tabla.addRow(datos);
                         operando="";
                     }
-
                     v1=Float.parseFloat(p.sacar());
                     v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v1+v2));
-                    datos[0]=actual;
-                    datos[1]=p.Recorrer1();
-                    tabla.addRow(datos);
-                    break;
-                case "-":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                        datos[0]=operando;
-                        datos[1]=p.Recorrer1();
-                        tabla.addRow(datos);
-                        operando="";
+                    switch(actual){
+                        case "+":
+                                p.empujar(String.valueOf(v1+v2));
+                        break;
+
+                        case "-":
+                                p.empujar(String.valueOf(v1-v2));
+                        break;
+
+                        case "*":
+                                p.empujar(String.valueOf(v1*v2));
+                        break;
+
+                        case "/":
+                                p.empujar(String.valueOf(v1/v2));
+                        break;
+
+                        case "^":
+                                p.empujar(String.valueOf(potenciaConRecursion(v1,v2)));
+                        break;
                     }
-
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v1-v2));
                     datos[0]=actual;
                     datos[1]=p.Recorrer1();
                     tabla.addRow(datos);
-                    break;
-                case "*":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                        datos[0]=operando;
-                        datos[1]=p.Recorrer1();
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v1*v2));
-                    datos[0]=actual;
-                    datos[1]=p.Recorrer1();
-                    tabla.addRow(datos);
-                    break;
-                case "/":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                        datos[0]=operando;
-                        datos[1]=p.Recorrer1();
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(v1/v2));
-                    datos[0]=actual;
-                    datos[1]=p.Recorrer1();
-                    tabla.addRow(datos);
-                    break;
-                case "^":
-                    if(!"".equals(operando)){
-                        p.empujar(operando);
-                        datos[0]=operando;
-                        datos[1]=p.Recorrer1();
-                        tabla.addRow(datos);
-                        operando="";
-                    }
-
-                    v1=Float.parseFloat(p.sacar());
-                    v2=Float.parseFloat(p.sacar());
-                    p.empujar(String.valueOf(potenciaConRecursion(v1,v2)));
-                    datos[0]=actual;
-                    datos[1]=p.Recorrer1();
-                    tabla.addRow(datos);
-                    break;
+                break;
+                
                 case " ":
                     if(!"".equals(operando)){
                         p.empujar(operando);
@@ -226,13 +144,13 @@ public class ResolverExpresion {
                         tabla.addRow(datos);
                         operando=""; 
                     }
-                    break;
+                break;
                 default:
                     while(isNumeric(actual)){
                     operando = actual+operando;
                     break;
                     }
-                    break;
+                break;
             }
         }
         return tabla;
@@ -266,7 +184,9 @@ public class ResolverExpresion {
     } //Cierre del método
      
     private String quitarCorchetes(String r){
-        return r.substring(1, r.length()-1);
+        StringBuilder retorno = new StringBuilder();
+        retorno.append(r.substring(1, r.length()-1));
+        return retorno.toString();
     }
 }
 
