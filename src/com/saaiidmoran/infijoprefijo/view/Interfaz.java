@@ -223,10 +223,11 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(ServiceMain.validarExpresionMatematica(jTextField1.getText())){
+        String arreglos = ServiceMain.sustituirLetraValor(ServiceMain.agregarSignosX(jTextField1.getText()));
+        if(ServiceMain.validarExpresionMatematica(arreglos)){
             ConvertirExpresion p=new ConvertirExpresion();
-            jTextField2.setText(p.Infijo2PrefijoTxt(jTextField1.getText()));
-            jTextField3.setText(p.Infijo2PosfijoTxt(jTextField1.getText()));
+            jTextField2.setText(p.Infijo2PrefijoTxt(arreglos));
+            jTextField3.setText(p.Infijo2PosfijoTxt(arreglos));
         }else{
             JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida");
         }
@@ -246,12 +247,13 @@ public class Interfaz extends javax.swing.JFrame {
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(ServiceMain.validarExpresionMatematica(jTextField1.getText())){
+            String arreglos = ServiceMain.sustituirLetraValor(ServiceMain.agregarSignosX(jTextField1.getText()));
+            if(ServiceMain.validarExpresionMatematica(arreglos)){
                 ConvertirExpresion p=new ConvertirExpresion();
-                jTextField2.setText(p.Infijo2PrefijoTxt(jTextField1.getText()));
-                jTextField3.setText(p.Infijo2PosfijoTxt(jTextField1.getText())); 
+                jTextField2.setText(p.Infijo2PrefijoTxt(arreglos));
+                jTextField3.setText(p.Infijo2PosfijoTxt(arreglos));
             }else{
-               JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida"); 
+                JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida");
             }
         }
     }//GEN-LAST:event_jTextField1KeyPressed

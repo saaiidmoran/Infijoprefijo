@@ -76,7 +76,7 @@ public class ResolverExpresion {
                     }
                     break;
                 default:
-                    while(isNumeric(actual)){
+                    while(ServiceMain.isNumeric(actual)){
                     operando += actual;
                     break;
                     }
@@ -146,7 +146,7 @@ public class ResolverExpresion {
                     }
                 break;
                 default:
-                    while(isNumeric(actual)){
+                    while(ServiceMain.isNumeric(actual)){
                     operando = actual+operando;
                     break;
                     }
@@ -154,16 +154,6 @@ public class ResolverExpresion {
             }
         }
         return tabla;
-    }
-    
-    private boolean isNumeric(String cadena){
-	try {
-            Integer.parseInt(cadena);
-            return true;
-	} catch (NumberFormatException nfe){
-            System.out.println("Ocurrió un error\n" + nfe);
-            return false;
-	}
     }
     
     private String Voltear(String cadena){
