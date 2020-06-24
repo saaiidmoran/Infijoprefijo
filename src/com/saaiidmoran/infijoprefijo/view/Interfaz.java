@@ -223,11 +223,10 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String arreglos = ServiceMain.sustituirLetraValor(ServiceMain.agregarSignosX(jTextField1.getText()));
-        if(ServiceMain.validarExpresionMatematica(arreglos)){
+        if(ServiceMain.validarExpresionMatematica(ServiceMain.agregarSignosX(jTextField1.getText()))){
             ConvertirExpresion p=new ConvertirExpresion();
-            jTextField2.setText(p.Infijo2PrefijoTxt(arreglos));
-            jTextField3.setText(p.Infijo2PosfijoTxt(arreglos));
+            jTextField2.setText(p.Infijo2PrefijoTxt(ServiceMain.agregarSignosX(jTextField1.getText())));
+            jTextField3.setText(p.Infijo2PosfijoTxt(ServiceMain.agregarSignosX(jTextField1.getText())));
         }else{
             JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida");
         }
@@ -247,11 +246,10 @@ public class Interfaz extends javax.swing.JFrame {
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String arreglos = ServiceMain.sustituirLetraValor(ServiceMain.agregarSignosX(jTextField1.getText()));
-            if(ServiceMain.validarExpresionMatematica(arreglos)){
+            if(ServiceMain.validarExpresionMatematica(ServiceMain.agregarSignosX(jTextField1.getText()))){
                 ConvertirExpresion p=new ConvertirExpresion();
-                jTextField2.setText(p.Infijo2PrefijoTxt(arreglos));
-                jTextField3.setText(p.Infijo2PosfijoTxt(arreglos));
+                jTextField2.setText(p.Infijo2PrefijoTxt(ServiceMain.agregarSignosX(jTextField1.getText())));
+                jTextField3.setText(p.Infijo2PosfijoTxt(ServiceMain.agregarSignosX(jTextField1.getText())));
             }else{
                 JOptionPane.showMessageDialog(null,"Error, no se insertó una expresión válida");
             }
@@ -260,13 +258,17 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        // Resolucion postfijo
         if(!ServiceMain.campoVacio(jTextField3.getText())){
             ResolverExpresion v = new ResolverExpresion();
-            if(!ServiceMain.validaSignos(jTextField3.getText())){
-               jTextField4.setText(jTextField3.getText()); 
+            String variablesSustituidas = ServiceMain.sustituirLetraValor(jTextField3.getText());
+            if(!ServiceMain.tieneSignos(jTextField3.getText())){
+                jTextField4.setText(jTextField3.getText()); 
+                jTable1.setModel(new DefaultTableModel());
+                jTable2.setModel(new DefaultTableModel());
             }else{
-                jTextField4.setText(v.ResulevePost(jTextField3.getText()));
-                jTable1.setModel(v.ResulevePostTabla(jTextField3.getText()));
+                jTextField4.setText(v.ResulevePost(variablesSustituidas));
+                jTable1.setModel(v.ResulevePostTabla(variablesSustituidas));
             }
         }else{
             JOptionPane.showMessageDialog(null,"Error, no se insertó nada");
@@ -275,13 +277,17 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //Resolucion Prefijo
         if(!ServiceMain.campoVacio(jTextField2.getText())){
             ResolverExpresion v = new ResolverExpresion();
-            if(!ServiceMain.validaSignos(jTextField2.getText())){
-               jTextField5.setText(jTextField2.getText()); 
+            String variablesSusutituidas = ServiceMain.sustituirLetraValor(jTextField2.getText());
+            if(!ServiceMain.tieneSignos(jTextField2.getText())){
+                jTextField5.setText(jTextField2.getText());
+                jTable1.setModel(new DefaultTableModel());
+                jTable2.setModel(new DefaultTableModel());
             }else{
-                jTextField5.setText(v.ResulevePref(jTextField2.getText()));
-                jTable2.setModel(v.ResulevePrefTabla(jTextField2.getText()));
+                jTextField5.setText(v.ResulevePref(variablesSusutituidas));
+                jTable2.setModel(v.ResulevePrefTabla(variablesSusutituidas));
             }
         }else{
             JOptionPane.showMessageDialog(null,"Error,no se insertó nada");

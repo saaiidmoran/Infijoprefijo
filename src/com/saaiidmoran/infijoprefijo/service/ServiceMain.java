@@ -30,10 +30,10 @@ public class ServiceMain {
         return "".equals(campo);
     }
     
-    public static boolean validaSignos(String ex){        
+    public static boolean tieneSignos(String ex){        
         int contador=0;
         for (int i = 0; i < ex.length(); i++) {
-          if ("+-*/^".contains("" + ex.charAt(i))) {
+          if ("+-*/^".contains(Character.toString(ex.charAt(i)))) {
             contador++;
           }
         }
@@ -54,10 +54,10 @@ public class ServiceMain {
                     contadorParentesis[1]++;
                     break;
                 case '+': case '-': case '*': case '/': case '^':
-                    if(i != ex.length()-1 && esSigno(""+ex.charAt(i+1))){
+                    if(i != ex.length()-1 && esSigno(Character.toString(ex.charAt(i+1)))){
                         return false;
                     }else
-                    if(i == ex.length()-1 && esSigno(""+ex.charAt(i))){
+                    if(i == ex.length()-1 && esSigno(Character.toString(ex.charAt(i)))){
                         return false;
                     }
                 break;
@@ -90,7 +90,7 @@ public class ServiceMain {
             switch(x.charAt(i)){
                 case ')':
                     if((i != x.length()-1 && x.charAt(i+1) == '(') ||
-                        (i != x.length()-1 && esNumeroOrLetra(""+x.charAt(i+1)))
+                        (i != x.length()-1 && esNumeroOrLetra(Character.toString(x.charAt(i+1))))
                       ){
                         retorno.append(x.charAt(i)).append("*");
                     }else{
@@ -103,13 +103,13 @@ public class ServiceMain {
                 break;
                 
                 default:
-                    if(esSigno(x.charAt(i)+"")){
+                    if(esSigno(Character.toString(x.charAt(i)))){
                         retorno.append(x.charAt(i));
                     }else{
                         if(
-                           (i != x.length()-1 && isNumeric("" + x.charAt(i)) && esLetra("" + x.charAt(i+1))) ||
-                           (i != x.length()-1 && esLetra("" + x.charAt(i)) && isNumeric("" + x.charAt(i+1))) ||
-                           (i != x.length()-1 && esLetra("" + x.charAt(i)) && esLetra("" + x.charAt(i+1))) ||
+                           (i != x.length()-1 && isNumeric(Character.toString(x.charAt(i))) && esLetra(Character.toString(x.charAt(i+1)))) ||
+                           (i != x.length()-1 && esLetra(Character.toString(x.charAt(i))) && isNumeric(Character.toString(x.charAt(i+1)))) ||
+                           (i != x.length()-1 && esLetra(Character.toString(x.charAt(i))) && esLetra(Character.toString(x.charAt(i+1)))) ||
                            (i != x.length()-1 && x.charAt(i+1) == '(')
                           ){
                             retorno.append(x.charAt(i)).append("*");

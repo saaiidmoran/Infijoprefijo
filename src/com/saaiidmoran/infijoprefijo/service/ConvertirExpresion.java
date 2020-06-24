@@ -9,8 +9,6 @@ import com.saaiidmoran.infijoprefijo.pila.Pila;
  
 public class ConvertirExpresion {
     
-    private final String simbolos = "+-*/()^=";
-    
     public String Infijo2PrefijoTxt(String infijo){
          Pila pilaPrefijo = pilaConvertirPrefijo(depurarExpresion(infijo));
          StringBuilder text = new StringBuilder();
@@ -39,12 +37,12 @@ public class ConvertirExpresion {
             char caracter = infijo.charAt(i);
             switch (caracter) {
             case ')':
-                PilaTemp.empujar(""+caracter);
+                PilaTemp.empujar(Character.toString(caracter));
                 break;
             case '+':case '-':case '^':case '*':case '/': case '=':
                 while (jerarquiaSignosPrefijo(caracter) > jerarquiaSignosPrefijo(PilaTemp.getCima().getDato().charAt(0)))
                     PilaDefinitiva.empujar(PilaTemp.sacar());
-                PilaTemp.empujar(""+caracter);
+                PilaTemp.empujar(Character.toString(caracter));
                 break;
             case '(':
                 while (PilaTemp.getCima().getDato().charAt(0) != ')')
@@ -52,7 +50,7 @@ public class ConvertirExpresion {
                 PilaTemp.sacar();
                 break;
             default:
-                PilaDefinitiva.empujar(""+caracter);
+                PilaDefinitiva.empujar(Character.toString(caracter));
             }
         }
         return PilaDefinitiva;
@@ -67,11 +65,13 @@ public class ConvertirExpresion {
        for (int i = 0; i < tamaño; i++) { 
            char caracter = infijo.charAt(i);
            switch (caracter) {
-               case '(': PilaTemp.empujar(""+caracter); break; 
+               case '(': 
+                   PilaTemp.empujar(Character.toString(caracter)); 
+               break; 
                case '+':case '-':case '^':case '*':case '/': case '=': 
                    while (jerarquiaSignosPostfijo(caracter) <= jerarquiaSignosPostfijo(PilaTemp.getCima().getDato().charAt(0)))
                        PilaDefinitiva.empujar(PilaTemp.sacar());
-                   PilaTemp.empujar(""+caracter);
+                   PilaTemp.empujar(Character.toString(caracter));
                    break;
                case ')': 
                    while (PilaTemp.getCima().getDato().charAt(0) != '(')
@@ -79,7 +79,7 @@ public class ConvertirExpresion {
                    PilaTemp.sacar();
                    break;
                default:
-                   PilaDefinitiva.empujar(""+caracter);
+                   PilaDefinitiva.empujar(Character.toString(caracter));
            } 
        } return PilaDefinitiva;
     }
@@ -131,7 +131,7 @@ public class ConvertirExpresion {
         String sSinEspacios = s.replaceAll("\\s+", ""); //Elimina espacios en blanco
         //Deja espacios entre operadores
         for (int i = 0; i < sSinEspacios.length(); i++) {        
-          if(simbolos.contains("" + sSinEspacios.charAt(i))) {
+          if("+-*/()^".contains(Character.toString(sSinEspacios.charAt(i)))) {
             construirRetorno.append(" ").append(sSinEspacios.charAt(i)).append(" ");
           }else{
               construirRetorno.append(sSinEspacios.charAt(i));
